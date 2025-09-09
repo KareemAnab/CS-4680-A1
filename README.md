@@ -24,3 +24,46 @@ This project applies classification to predict student academic stress levels (L
 3. pip install -r requirements.txt
 4. python train_classification.py
 
+## Code Analysis
+
+### Data Preprocessing
+- Dropped unused columns (`Timestamp`, raw numeric stress index, and target itself).
+- Split features into **numeric** (peer/home pressure, competition rating) and **categorical** (academic stage, environment, coping strategy, habits).
+- Used a `ColumnTransformer`:
+  - Numeric: scaled with `StandardScaler`.
+  - Categorical: encoded with `OneHotEncoder`.
+- Wrapped preprocessing in a `Pipeline` to prevent data leakage.
+
+### Model Training
+- Two classifiers were applied:
+  - **Logistic Regression** – linear, interpretable baseline.
+  - **Random Forest** – non-linear ensemble with stronger generalization.
+- Both trained and validated using a 80/20 train/test split.
+
+### Evaluation
+- 5-fold stratified cross-validation applied on the training set using **macro F1** (balances class performance).
+- Final evaluation metrics (on the test set): **accuracy, precision, recall, F1-score**.
+- Confusion matrices saved for each model in the `plots/` folder.
+
+### Best Model Selection
+- Models compared by **macro F1**.
+- Predictions from the best model are saved into `artifacts/test_predictions.csv`.
+
+---
+
+## Findings
+
+- **Logistic Regression**
+  - Accuracy ≈ **64%**, Macro F1 ≈ **0.54**.
+  - Strong on *Low* and *High* classes but **failed to predict Moderate**.
+  - Indicates linear separation is not sufficient for imbalanced data.
+
+- **Random Forest**
+  - Accuracy ≈ **71%**, Macro F1 ≈ **0.70**.
+  - Strong results on *Low* and *High*, Moderate class weaker but still better than Logistic Regression.
+  - Handles non-linear patterns better.
+
+- **Overall Conclusion**
+  - Random Forest performed best overall.
+  - Both models show difficulty with the underrepresented **Moderate** class.
+  - Future improvements: oversampling, class weighting, or more data collection.
