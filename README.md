@@ -49,8 +49,6 @@ This project applies classification to predict student academic stress levels (L
 - Models compared by **macro F1**.
 - Predictions from the best model are saved into `artifacts/test_predictions.csv`.
 
----
-
 ## Findings
 
 - **Logistic Regression**
