@@ -49,6 +49,20 @@ This project applies classification to predict student academic stress levels (L
 - Models compared by **macro F1**.
 - Predictions from the best model are saved into `artifacts/test_predictions.csv`.
 
+## Model Comparison
+
+Both models were evaluated on the same 20% held-out test set and also 5-fold stratified CV was used on the training set (macro F1).
+
+| Model              | Test Accuracy | Test Macro F1 |
+|--------------------|---------------|---------------|
+| Logistic Regression| 0.643         | 0.536         |
+| Random Forest      | 0.714         | 0.699         |
+
+**Discussion:**
+- **Random Forest** achieved the highest accuracy and macro-F1, indicating better balanced performance across the three classes (Low/Moderate/High), and it captures non-linear interactions between survey features.  
+- **Logistic Regression** is a strong linear baseline and more interpretable, but it struggled with the **Moderate** class (class imbalance + non-linear boundaries).  
+- **Choice:** For this dataset, **Random Forest** is more suitable if the objective is predictive performance; Logistic Regression remains useful for interpretability/baseline reporting.  
+
 ## Findings
 
 - **Logistic Regression**
