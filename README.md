@@ -58,7 +58,7 @@ Both models were evaluated on the same 20% held-out test set and also 5-fold str
 | Logistic Regression| 0.643         | 0.536         |
 | Random Forest      | 0.714         | 0.699         |
 
-**Discussion:**
+**Discussion for Suitability:**
 - **Random Forest** achieved the highest accuracy and macro-F1, indicating better balanced performance across the three classes (Low/Moderate/High), and it captures non-linear interactions between survey features.  
 - **Logistic Regression** is a strong linear baseline and more interpretable, but it struggled with the **Moderate** class (class imbalance + non-linear boundaries).  
 - **Choice:** For this dataset, **Random Forest** is more suitable if the objective is predictive performance; Logistic Regression remains useful for interpretability/baseline reporting.  
